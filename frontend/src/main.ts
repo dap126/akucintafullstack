@@ -8,8 +8,9 @@ import EmptyLayout from './components/EmptyLayout.vue'
 
 const app = createApp(App)
 
-app.component('DefaultLayout', DashboardLayout)
-app.component('EmptyLayout', EmptyLayout)
+app.component('default-layout', DashboardLayout)
+app.component('empty-layout', EmptyLayout)
 
 app.use(router)
+
 app.mount('#app')

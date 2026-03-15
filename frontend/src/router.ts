@@ -79,8 +79,27 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+})
+
+// FRONTEND MIDDLEWARE (Satpam Pintu Depan UI)
+router.beforeEach((to, from, next) => {
+  // Mengecek apakah ada Token JWT di penyimpanan browser
+  const token = localStorage.getItem('token')
+
+  // Kalau mau masuk ke halaman yang digembok (Selain Login) TAPI tidak punya token
+  if (to.name !== 'Login' && !token) {
+    next({ name: 'Login' }) // Tendang paksa ke halaman Login
+  }
+  // Kalau sudah punya token (sudah login) TAPI iseng buka halaman login lagi
+  else if (to.name === 'Login' && token) {
+    next({ name: 'Dashboard' }) // Kembalikan ke Dashboard
+  }
+  // Kalau semuanya aman
+  else {
+    next() // Silakan lewat
+  }
 })
 
 export default router

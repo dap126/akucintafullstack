@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useSidebar } from '../composables/useSidebar'
 
 const dropdownOpen = ref(false)
 const { isOpen } = useSidebar()
+const router = useRouter()
+
+const logout = () => {
+  localStorage.removeItem('token')
+  router.push('/')
+}
 </script>
 
 <template>
@@ -108,12 +115,12 @@ const { isOpen } = useSidebar()
               href="#"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >Products</a>
-            <router-link
-              to="/"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+            <button
+              @click="logout"
+              class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
             >
               Log out
-            </router-link>
+            </button>
           </div>
         </transition>
       </div>

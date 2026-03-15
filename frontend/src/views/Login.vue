@@ -1,14 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useAuth } from '../services/auth'
 
-const router = useRouter()
-const email = ref('johndoe@mail.com')
-const password = ref('@#!@#asdf1231!_!@#')
-
-function login() {
-  router.push('/dashboard')
-}
+const { username, password, errorMessage, isLoading, login } = useAuth()
 </script>
 
 <template>
@@ -34,15 +27,19 @@ function login() {
             fill="white"
           />
         </svg>
-        <span class="text-2xl font-semibold text-gray-700">V-Dashboard</span>
+        <span class="text-2xl font-semibold text-gray-700">Puskesmas</span>
       </div>
 
       <form class="mt-4" @submit.prevent="login">
+        <div v-if="errorMessage" class="p-3 mb-4 text-sm text-red-700 bg-red-100 rounded-lg" role="alert">
+          {{ errorMessage }}
+        </div>
         <label class="block">
-          <span class="text-sm text-gray-700">Email</span>
+          <span class="text-sm text-gray-700">Username</span>
           <input
-            v-model="email"
-            type="email"
+            type="text"
+            v-model="username"
+            required
             class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
           >
         </label>
@@ -50,8 +47,9 @@ function login() {
         <label class="block mt-3">
           <span class="text-sm text-gray-700">Password</span>
           <input
-            v-model="password"
             type="password"
+            v-model="password"
+            required
             class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
           >
         </label>
@@ -63,21 +61,15 @@ function login() {
               <span class="mx-2 text-sm text-gray-600">Remember me</span>
             </label>
           </div>
-
-          <div>
-            <a
-              class="block text-sm text-indigo-700 fontme hover:underline"
-              href="#"
-            >Forgot your password?</a>
-          </div>
         </div>
 
         <div class="mt-6">
           <button
             type="submit"
-            class="w-full px-4 py-2 text-sm text-center text-white bg-indigo-600 rounded-md focus:outline-none hover:bg-indigo-500"
+            :disabled="isLoading"
+            class="w-full px-4 py-2 text-sm text-center text-white bg-indigo-600 rounded-md focus:outline-none hover:bg-indigo-500 disabled:opacity-50"
           >
-            Sign in
+            {{ isLoading ? 'Signing in...' : 'Sign in' }}
           </button>
         </div>
       </form>
