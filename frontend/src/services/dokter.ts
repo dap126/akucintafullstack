@@ -10,6 +10,7 @@ export interface Dokter {
   status: string
   users_idusers: number
   poli_id_poli: number
+  nama_poli?: string
 }
 const API_URL = 'http://localhost:3000/api/dokter'
 
