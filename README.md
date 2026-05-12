@@ -6,11 +6,11 @@ Sistem Informasi Pelayanan Puskesmas adalah aplikasi berbasis web untuk mendigit
 ## Anggota Kelompok
 Proyek ini dikembangkan bersama oleh 5 anggota:
 
-1. **[Nurrachman Daffa]** - [0110224051]
-2. **[Linda Agistina Handani]** - [0110224043]
-3. **[Syauqi Rabbani]** - [0110224208]
-4. **[Fahrezi Noviansyah]** - [0110224171]
-5. **[Prasetya Mulya Baskara]** - [0110224108]
+1. **Nurrachman Daffa** - 0110224051
+2. **Linda Agistina Handani** - 0110224043
+3. **Syauqi Rabbani** - 0110224208
+4. **Fahrezi Noviansyah** - 0110224171
+5. **Prasetya Mulya Baskara** - 0110224108
 
 ## Fitur Utama (Rencana)
 - **Registrasi & Antrian Pasien:** Registrasi pasien online maupun offline. Pasien harus didata dan diberikan nomor antrian berdasarkan poli yang dituju.

@@ -27,6 +27,12 @@ export const medisService = {
     return response.data
   },
 
+  // Update data medis
+  async updateMedis(id: number, data: Partial<medis>): Promise<any> {
+    const response = await axios.put(`${API_URL_MEDIS}/${id}`, data)
+    return response.data
+  },
+
   // Hapus data medis
   async deleteMedis(id: number): Promise<void> {
     await axios.delete(`${API_URL_MEDIS}/${id}`)
@@ -62,5 +68,17 @@ export const resepService = {
   // Hapus data resep
   async deleteResep(id: number): Promise<void> {
     await axios.delete(`${API_URL_RESEP}/${id}`)
+  },
+
+  // Ambil resep berdasarkan id_rm
+  async getResepByRm(id_rm: number): Promise<any[]> {
+    const response = await axios.get(`${API_URL_RESEP}/by-rm/${id_rm}`)
+    return response.data
+  },
+
+  // Update resep berdasarkan id_rm
+  async updateResepByRm(id_rm: number, payload: { daftar_obat: any[] }): Promise<any> {
+    const response = await axios.put(`${API_URL_RESEP}/by-rm/${id_rm}`, payload)
+    return response.data
   },
 }

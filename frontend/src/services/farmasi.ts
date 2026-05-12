@@ -26,15 +26,20 @@ export const obatService = {
     return response.data
   },
 }
+
 const API_URL_DETAILRESEP = 'http://localhost:3000/api/detail-resep'
+const API_URL_RESEPOBAT   = 'http://localhost:3000/api/resep-obat'
 
 export interface DetailResep {
   id_detail?: number
+  no_resep: string
   jumlah_obat: number
   dosis: string
   resep_obat_id_resep: number
   obat_id_obat: number
   nama_obat: string
+  nama_pasien: string
+  status_tebus: 'belum' | 'sudah' | 'batal'
 }
 
 export const detailresepService = {
@@ -48,8 +53,15 @@ export const detailresepService = {
     return response.data
   },
 
-  async deleteDetailResep(id: number) {
-    const response = await axios.delete(`${API_URL_DETAILRESEP}/${id}`)
+  // Soft delete: ubah status_tebus = 'batal' (data tetap di DB)
+  async batalResep(idResep: number) {
+    const response = await axios.patch(`${API_URL_RESEPOBAT}/${idResep}/batal`)
+    return response.data
+  },
+
+  // Toggle status tebus: 'belum' ↔ 'sudah'
+  async updateStatusTebus(idResep: number, status: 'belum' | 'sudah') {
+    const response = await axios.patch(`${API_URL_RESEPOBAT}/${idResep}/status`, { status_tebus: status })
     return response.data
   },
 }
